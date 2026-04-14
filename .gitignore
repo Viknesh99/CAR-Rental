@@ -1,0 +1,88 @@
+############################################
+# GENERAL
+############################################
+*.log
+*.tmp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+############################################
+# NODE / ANGULAR
+############################################
+node_modules/
+dist/
+tmp/
+out-tsc/
+.angular/
+.cache/
+
+# Angular environment files (optional if sensitive)
+src/environments/*.ts
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+############################################
+# IDE FILES
+############################################
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+############################################
+# JAVA / SPRING BOOT
+############################################
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Logs
+logs/
+*.log
+
+############################################
+# SPRING BOOT SPECIFIC
+############################################
+application.properties
+application.yml
+application-*.yml
+application-*.properties
+
+############################################
+# DATABASE FILES
+############################################
+*.db
+*.sqlite
+
+############################################
+# OS FILES
+############################################
+ehthumbs.db
+Desktop.ini
+
+############################################
+# TEST / COVERAGE
+############################################
+coverage/
+*.lcov
+
+############################################
+# ENV FILES
+############################################
+.env
+.env.*

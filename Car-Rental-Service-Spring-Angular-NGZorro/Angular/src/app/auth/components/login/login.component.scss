@@ -1,0 +1,83 @@
+.top-image {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  margin-top: 0;
+  z-index: 1;
+}
+
+.top-image img {
+  width: 100%;
+  height: 500px;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  object-fit: cover;
+}
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-size: 18px;
+  color: #003973;
+  font-weight: bold;
+}
+.form-item{
+  margin-top:15px;
+}
+
+.login-form {
+  max-width: 400px;
+}
+
+.imgDiv {
+  width: 100%;
+  vertical-align: middle;
+  margin-bottom: 40px;
+}
+
+.login-form-margin {
+  margin-bottom: 26px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+  font-weight: bold;
+  background-color: #001529;
+  border: none;
+  margin-top: 25px;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.child {
+  padding-top: 20px;
+  padding-bottom: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  position: absolute;
+  width: 400px;
+  background-color: white;
+  top: 690px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  border: 1px solid #e6e6e6;
+  margin-bottom: 32px;
+  z-index: 1;
+}
+
+.error-tip {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}

@@ -1,0 +1,45 @@
+<div *ngIf="!isAdminLoggedIn && !isCustomerLoggedIn">
+  <header class="main-header custom-navbar">
+    <div class="navbar-title">
+      <img src="../assets/images/logo.png" width="10%" height="5%" style="margin-left: 25px">
+      <a routerLink="/login">YR RENT</a>
+    </div>
+    <div class="nav-links">
+      <a class="link-button" routerLink="/register" routerLinkActive="active">Signup</a>
+      <a class="link-button" routerLink="/login" routerLinkActive="active">Login</a>
+    </div>
+  </header>
+</div>
+
+<div *ngIf="isAdminLoggedIn">
+  <header class="main-header custom-navbar">
+    <div class="navbar-title">
+      <img src="../assets/images/logo.png" width="10%" height="5%" style="margin-left: 25px">
+      <a routerLink="/login">YR RENT</a>
+    </div>
+    <div class="nav-links">
+      <a class="link-button" routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+      <a class="link-button" routerLink="/admin/car" routerLinkActive="active">Post Car</a>
+      <a class="link-button" routerLink="/admin/bookings" routerLinkActive="active">Bookings</a>
+      <a class="link-button" routerLink="/admin/car/search" routerLinkActive="active">Search</a>
+      <a class="link-button" (click)="logout()" routerLinkActive="active">Logout</a>
+    </div>
+  </header>
+</div>
+
+<div *ngIf="isCustomerLoggedIn">
+  <header class="main-header custom-navbar">
+    <div class="navbar-title">
+      <img src="../assets/images/logo.png" width="10%" height="5%" style="margin-left: 25px">
+      <a routerLink="/login">YR RENT</a>
+    </div>
+    <div class="nav-links">
+      <a class="link-button" routerLink="/customer/dashboard" routerLinkActive="active">Dashboard</a>
+      <a class="link-button" routerLink="/customer/bookings" routerLinkActive="active">Bookings</a>
+      <a class="link-button" routerLink="/customer/search" routerLinkActive="active">Search</a>
+      <a class="link-button" (click)="logout()" routerLinkActive="active">Logout</a>
+    </div>
+  </header>
+</div>
+
+<router-outlet></router-outlet>
