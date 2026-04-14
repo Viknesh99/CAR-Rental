@@ -1,12 +1,19 @@
 # ── Stage 1: Build ──────────────────────────────────────────────────────────
 FROM node:18-alpine AS builder
 
+# API_URL is injected at build time via Railway service variable
+ARG API_URL=http://localhost:8080
+
 WORKDIR /app
 
 COPY package*.json ./
 RUN npm ci
 
 COPY . .
+
+# Replace the placeholder URL with the real backend URL before building
+RUN sed -i "s|http://localhost:8080|${API_URL}|g" src/environments/environment.prod.ts
+
 RUN npm run build -- --configuration production
 
 # ── Stage 2: Serve ───────────────────────────────────────────────────────────
