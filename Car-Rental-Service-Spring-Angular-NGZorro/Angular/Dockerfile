@@ -1,26 +1,23 @@
 # ── Stage 1: Build ──────────────────────────────────────────────────────────
 FROM node:18-alpine AS builder
 
-# API_URL is injected at build time via Railway service variable
-ARG API_URL=http://localhost:8080
-
 WORKDIR /app
 
 COPY package*.json ./
 RUN npm ci
 
 COPY . .
-
-# Replace the placeholder URL with the real backend URL before building
-RUN sed -i "s|http://localhost:8080|${API_URL}|g" src/environments/environment.prod.ts
-
 RUN npm run build -- --configuration production
 
 # ── Stage 2: Serve ───────────────────────────────────────────────────────────
 FROM nginx:alpine
 
 COPY --from=builder /app/dist/reatacar-angular /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# The official nginx image automatically runs envsubst on *.template files
+# in /etc/nginx/templates/ and writes the result to /etc/nginx/conf.d/
+# This injects BACKEND_URL at container start time (no rebuild needed).
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 
 EXPOSE 80
 
