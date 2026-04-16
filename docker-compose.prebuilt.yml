@@ -46,13 +46,11 @@ services:
       db:
         condition: service_healthy
 
-  # ── Angular Frontend ─────────────────────────────────────────────────────────
+  # ── Angular Frontend (pre-built locally, no Node.js build on EC2) ───────────
   frontend:
     build:
       context: ./Car-Rental-Service-Spring-Angular-NGZorro/Angular
-      dockerfile: Dockerfile
-      args:
-        BUILD_CONFIG: docker   # Use "production" for full optimized build
+      dockerfile: Dockerfile.prebuilt
     container_name: rentacar_frontend
     restart: unless-stopped
     environment:

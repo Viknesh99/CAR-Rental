@@ -1,0 +1,14 @@
+# Lightweight Dockerfile — no build stage, just serves pre-built Angular files.
+# Usage:
+#   1. Build locally:  npx ng build --configuration production
+#   2. Copy the whole Angular/ folder (including dist/) to EC2
+#   3. docker compose -f docker-compose.prebuilt.yml up -d
+FROM nginx:alpine
+
+COPY dist/reatacar-angular /usr/share/nginx/html
+
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

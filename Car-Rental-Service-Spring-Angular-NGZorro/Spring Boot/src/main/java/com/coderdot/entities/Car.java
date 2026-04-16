@@ -31,7 +31,8 @@ public class Car {
 
     private Integer price;
 
-    @Column(columnDefinition = "longblob")
+    @Lob
+    @Column(columnDefinition = "bytea")
     private byte[] image;
 
     public CarDto getCarDto() {

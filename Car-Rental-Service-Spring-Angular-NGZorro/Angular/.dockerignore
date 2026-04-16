@@ -1,5 +1,5 @@
 node_modules/
-dist/
+# dist/ is NOT ignored — needed by Dockerfile.prebuilt (pre-built locally)
 .angular/
 *.md
 .git

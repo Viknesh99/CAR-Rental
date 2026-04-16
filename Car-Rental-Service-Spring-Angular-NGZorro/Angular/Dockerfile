@@ -1,13 +1,23 @@
 # ── Stage 1: Build ──────────────────────────────────────────────────────────
 FROM node:18-alpine AS builder
 
+# Build configuration: "docker" (fast, low-resource) or "production" (full AOT)
+ARG BUILD_CONFIG=docker
+
 WORKDIR /app
 
+# Copy dependency manifests first for better Docker layer caching.
+# npm ci only re-runs when package*.json changes.
 COPY package*.json ./
 RUN npm ci
 
+# Copy source code (changes here don't invalidate the npm ci layer)
 COPY . .
-RUN npm run build -- --configuration production
+
+# Cap Node heap to 512 MB so the build doesn't OOM on small instances
+ENV NODE_OPTIONS="--max-old-space-size=512"
+
+RUN npx ng build --configuration ${BUILD_CONFIG}
 
 # ── Stage 2: Serve ───────────────────────────────────────────────────────────
 FROM nginx:alpine
