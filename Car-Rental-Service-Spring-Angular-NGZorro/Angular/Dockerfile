@@ -14,8 +14,8 @@ RUN npm ci
 # Copy source code (changes here don't invalidate the npm ci layer)
 COPY . .
 
-# Cap Node heap to 512 MB so the build doesn't OOM on small instances
-ENV NODE_OPTIONS="--max-old-space-size=512"
+# Increase Node heap to 1536 MB for the Angular build
+ENV NODE_OPTIONS="--max-old-space-size=1536"
 
 RUN npx ng build --configuration ${BUILD_CONFIG}
 

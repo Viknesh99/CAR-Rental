@@ -23,6 +23,9 @@ export class GetBookingsComponent {
       this.isSpinning = false;
       console.log(res);
       this.bookedCars = res;
+    }, error => {
+      this.isSpinning = false;
+      console.error('Failed to load bookings', error);
     })
   }
 
@@ -33,6 +36,7 @@ export class GetBookingsComponent {
       this.getBookings();
       this.message.success("Status changed successfully", { nzDuration: 5000 });
     }, error => {
+      this.isSpinning = false;
       this.message.error("Something went wrong", { nzDuration: 5000 });
     })
   }

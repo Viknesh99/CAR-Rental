@@ -3,7 +3,7 @@ import { CustomerService } from '../../services/customer.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { StorageService } from 'src/app/auth/services/storage/storage.service';
+import { StorageService } from '../../../../auth/services/storage/storage.service';
 
 @Component({
   selector: 'app-book-car',
@@ -32,8 +32,12 @@ export class BookCarComponent {
   getCarById() {
     this.customerService.getCarById(this.carId).subscribe((res) => {
       console.log(res);
-      res.processedImg = 'data:image/jpeg;base64,' + res.returnedImage;
+      res.processedImg = res.returnedImage
+        ? 'data:image/jpeg;base64,' + res.returnedImage
+        : null;
       this.car = res;
+    }, error => {
+      console.error('Failed to load car', error);
     })
   }
 

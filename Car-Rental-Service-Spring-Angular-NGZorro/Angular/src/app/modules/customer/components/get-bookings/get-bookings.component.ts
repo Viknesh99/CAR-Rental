@@ -21,6 +21,9 @@ export class GetBookingsComponent {
       this.isSpinning = false;
       console.log(res);
       this.bookedCars = res;
+    }, error => {
+      this.isSpinning = false;
+      console.error('Failed to load bookings', error);
     })
   }
 

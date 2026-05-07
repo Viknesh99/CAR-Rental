@@ -20,9 +20,13 @@ export class CustomerDashboardComponent {
     this.customerService.getAlCars().subscribe((res) => {
       console.log(res);
       res.forEach(element => {
-        element.processedImg = 'data:image/jpeg;base64,' + element.returnedImage;
+        element.processedImg = element.returnedImage
+          ? 'data:image/jpeg;base64,' + element.returnedImage
+          : null;
         this.cars.push(element);
       });
+    }, error => {
+      console.error('Failed to load cars', error);
     })
   }
 

@@ -40,6 +40,10 @@ export class PostCarComponent {
   }
 
   postCar() {
+    if (!this.selectedFile) {
+      this.notification.error('ERROR', 'Please select an image for the car', { nzDuration: 5000 });
+      return;
+    }
     console.log(this.postCarForm.value);
     const formData: FormData = new FormData();
     formData.append('image', this.selectedFile);

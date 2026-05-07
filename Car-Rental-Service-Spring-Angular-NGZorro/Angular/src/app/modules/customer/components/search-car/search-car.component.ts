@@ -11,6 +11,7 @@ export class SearchCarComponent {
 
   cars: any = [];
   isSpinning = false;
+  searched = false;
   validateForm: FormGroup;
   listOfBrands = ["BMW", "AUDI", "FERRARI", "TESLA", "VOLVO", "TOYOTA", "HONDA", "FORD", "NISSAN", "HYUNDAI", "LEXUS", "KIA"];
   listOfType = ["Petrol", "Hybrid", "Diesel", "Electric", "CNG"];
@@ -29,13 +30,22 @@ export class SearchCarComponent {
 
   searchCar() {
     this.isSpinning = true;
+    this.cars = [];
+    this.searched = false;
     this.customerService.searchCar(this.validateForm.value).subscribe((res) => {
       this.isSpinning = false;
-      console.log(res);
-      res.carDtoList.forEach(element => {
-        element.processedImg = 'data:image/jpeg;base64,' + element.returnedImage;
-        this.cars.push(element);
-      });
+      this.searched = true;
+      if (res && res.carDtoList) {
+        res.carDtoList.forEach(element => {
+          element.processedImg = element.returnedImage
+            ? 'data:image/jpeg;base64,' + element.returnedImage
+            : null;
+          this.cars.push(element);
+        });
+      }
+    }, error => {
+      this.isSpinning = false;
+      console.error('Search failed', error);
     })
   }
 

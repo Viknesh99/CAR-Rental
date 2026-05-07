@@ -17,7 +17,8 @@
         <div class="form-item">
           <label for="brand" style="font-weight: bold; color: #003973;">Brand</label>
           <select id="brand" formControlName="brand" class="form-control">
-            <option *ngFor="let brand of listOfBrands" [value]="brand">{{ brand }}</option>
+            <option [ngValue]="null">-- All Brands --</option>
+            <option *ngFor="let brand of listOfBrands" [ngValue]="brand">{{ brand }}</option>
           </select>
           <p *ngIf="validateForm.controls['brand'].invalid && validateForm.controls['brand'].touched"
              class="error-tip">This Input Is Required!</p>
@@ -28,7 +29,8 @@
         <div class="form-item">
           <label for="type" style="font-weight: bold; color: #003973;">Type</label>
           <select id="type" formControlName="type" class="form-control">
-            <option *ngFor="let type of listOfType" [value]="type">{{ type }}</option>
+            <option [ngValue]="null">-- All Types --</option>
+            <option *ngFor="let type of listOfType" [ngValue]="type">{{ type }}</option>
           </select>
           <p *ngIf="validateForm.controls['type'].invalid && validateForm.controls['type'].touched"
              class="error-tip">This Input Is Required!</p>
@@ -39,7 +41,8 @@
         <div class="form-item">
           <label for="color" style="font-weight: bold; color: #003973;">Color</label>
           <select id="color" formControlName="color" class="form-control">
-            <option *ngFor="let color of listOfColor" [value]="color">{{ color }}</option>
+            <option [ngValue]="null">-- All Colors --</option>
+            <option *ngFor="let color of listOfColor" [ngValue]="color">{{ color }}</option>
           </select>
           <p *ngIf="validateForm.controls['color'].invalid && validateForm.controls['color'].touched"
              class="error-tip">This Input Is Required!</p>
@@ -50,7 +53,8 @@
         <div class="form-item">
           <label for="transmission" style="font-weight: bold; color: #003973;">Transmission</label>
           <select id="transmission" formControlName="transmission" class="form-control">
-            <option *ngFor="let transmission of listOfTransmission" [value]="transmission">{{ transmission }}</option>
+            <option [ngValue]="null">-- All Transmissions --</option>
+            <option *ngFor="let transmission of listOfTransmission" [ngValue]="transmission">{{ transmission }}</option>
           </select>
           <p *ngIf="validateForm.controls['transmission'].invalid && validateForm.controls['transmission'].touched"
              class="error-tip">This Input Is Required!</p>
@@ -66,6 +70,14 @@
   </div>
 
   <div class="row gy-4">
+    <div class="col-12" *ngIf="searched && cars.length === 0">
+      <div class="alert alert-warning text-center" role="alert">
+        No cars found matching your search. Try selecting <strong>-- All --</strong> for fields you don't want to filter.
+      </div>
+    </div>
+    <div class="col-12" *ngIf="searched && cars.length > 0">
+      <p class="text-muted">Found <strong>{{ cars.length }}</strong> car(s)</p>
+    </div>
     <div class="col-md-6" *ngFor="let car of cars">
       <div class="card h-80 shadow-sm" style="border-radius: 8px; overflow: hidden;">
         <div class="row g-0">
